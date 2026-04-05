@@ -1,153 +1,129 @@
-﻿# 🚀 [你的项目名] - [一句话定位]
+﻿# OpenClaw-Studio
 
-> [一句话卖点：例如「5分钟搭建可视化 AI 工作流平台，开箱即用，支持企业级扩展」]
+可视化多智能体工作流平台。用拖拽方式编排任务流、实时查看执行过程、统一管理模型与工具，支持本地部署和二次开发。
 
-[![GitHub Stars](https://img.shields.io/github/stars/[GITHUB_OWNER]/[GITHUB_REPO]?style=for-the-badge)](https://github.com/[GITHUB_OWNER]/[GITHUB_REPO]/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/[GITHUB_OWNER]/[GITHUB_REPO]?style=for-the-badge)](https://github.com/[GITHUB_OWNER]/[GITHUB_REPO]/issues)
-[![License](https://img.shields.io/github/license/[GITHUB_OWNER]/[GITHUB_REPO]?style=for-the-badge)](./LICENSE)
-[![Latest Release](https://img.shields.io/github/v/release/[GITHUB_OWNER]/[GITHUB_REPO]?style=for-the-badge)](https://github.com/[GITHUB_OWNER]/[GITHUB_REPO]/releases)
-[![Downloads](https://img.shields.io/github/downloads/[GITHUB_OWNER]/[GITHUB_REPO]/total?style=for-the-badge)](https://github.com/[GITHUB_OWNER]/[GITHUB_REPO]/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/allen219213-cloud/OpenClaw-Studio?style=flat-square)](https://github.com/allen219213-cloud/OpenClaw-Studio/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/allen219213-cloud/OpenClaw-Studio?style=flat-square)](https://github.com/allen219213-cloud/OpenClaw-Studio/issues)
+[![License](https://img.shields.io/github/license/allen219213-cloud/OpenClaw-Studio?style=flat-square)](./LICENSE)
+[![Release](https://img.shields.io/github/v/release/allen219213-cloud/OpenClaw-Studio?style=flat-square)](https://github.com/allen219213-cloud/OpenClaw-Studio/releases)
 
----
+## 项目解决什么问题
 
-## ✨ 项目定位
+OpenClaw-Studio 解决的是“多智能体应用很强，但搭建和运营门槛高”的问题：
 
-**[你的项目名]** 是一个 **[项目类型]**，帮助你快速解决 **[解决的问题]**。  
-不需要复杂配置，不需要深入底层，目标就是：**让新手也能在几分钟内跑起来，老手也能二次开发到生产级。**
+- 不会写复杂配置的人，也能通过可视化界面编排任务。
+- 需要追踪执行过程的人，可以看到实时日志和智能体对话。
+- 需要团队协作的人，可以共享模板、共享任务、复用资产。
 
-### 🔥 核心功能
+## 核心功能
 
-- [核心功能1]
-- [核心功能2]
-- [核心功能3]
-- [核心功能4]
-- [核心功能5]
+1. 任务可视化编排器（React Flow）
+- 拖拽编排节点：开始、结束、智能体、条件判断、循环、并行
+- 节点属性面板：配置 label、agent_id、表达式等参数
+- JSON/YAML 导入导出，兼容 OpenClaw 风格结构
+- 内置 20+ 工作流模板
 
-### 🧱 技术栈
+2. 任务执行中心
+- 任务列表搜索与过滤
+- 执行控制：启动、暂停、继续、停止、重试
+- 实时日志流（WebSocket）
+- 智能体思考过程与输出展示
+- 结果导出：Markdown / HTML / PDF
 
-- 后端：[技术栈-后端，如 Python 3.11 / FastAPI / SQLAlchemy]
-- 前端：[技术栈-前端，如 React 18 / TypeScript / React Flow]
-- 基础设施：[技术栈-部署，如 Docker / Docker Compose]
+3. API 配置中心
+- 支持主流模型提供商：OpenAI、Anthropic、Gemini、DeepSeek、豆包、通义千问、文心一言
+- API Key 管理、默认模型、代理配置
+- 配额统计与连接测试
 
-### 🚢 部署方式
+4. 智能体管理
+- 智能体 CRUD、模板库、导入导出
+- 创建向导、模型参数配置、工具配置、记忆配置
+- Markdown 实时预览
 
-- [部署方式1：一键脚本]
-- [部署方式2：Docker Compose]
-- [部署方式3：手动安装]
+5. 工具市场与协作分享
+- 官方工具 + 第三方工具安装入口
+- 工具评分与评论
+- 多用户（管理员/普通用户）
+- 公开/私有分享链接
+- 社区模板上传、下载、评分
 
----
+## 技术栈
 
-## 🖼️ 视觉展示（先看效果再看代码）
+- 后端：Python 3.11+, FastAPI, Pydantic, SQLAlchemy
+- 前端：React 18, TypeScript, Vite, Tailwind CSS v3, React Flow v11, Zustand
+- 部署：Docker Compose / 手动安装
+- 通信：REST API + WebSocket
 
-> 图片命名规范：
-> - `assets/screenshots/screenshot-1-main.png`
-> - `assets/screenshots/screenshot-2-core.png`
-> - `assets/screenshots/compare-old-vs-new.png`
-> - `assets/screenshots/demo-install-to-result.gif`
+## 界面预览
 
-### 1) 全景图（全局认知）
-![全景图](./assets/screenshots/screenshot-1-main.png)
+### 1) 全景图
+![main](./assets/screenshots/screenshot-1-main.png)
 
-### 2) 核心功能特写（关键动作）
-![核心功能](./assets/screenshots/screenshot-2-core.png)
+### 2) 任务编排特写
+![composer](./assets/screenshots/screenshot-2-core.png)
 
-### 3) 效果对比图（价值证明）
-![效果对比](./assets/screenshots/compare-old-vs-new.png)
+### 3) 执行页效果
+![execution](./assets/screenshots/compare-old-vs-new.png)
 
----
+> 截图存储目录：`assets/screenshots/`
 
-## 💡 为什么用户会喜欢它（用户视角）
+## 3 分钟快速启动
 
-1. **上手快**：跟着文档 5 分钟即可跑通，不会卡在环境配置。
-2. **看得懂**：可视化操作比写一堆配置文件更直观，降低学习门槛。
-3. **能扩展**：支持插件、模板、二次开发，业务越复杂越体现价值。
-4. **可协作**：支持分享、模板复用、多角色协作，团队效率明显提升。
-5. **够稳定**：有日志、错误兜底、执行状态可视化，定位问题不靠猜。
-
----
-
-## ⚡ 快速上手（新手友好）
-
-### 方式 A：一键脚本（推荐）
-
-```bash
-# [请替换为你的一键安装命令]
-curl -fsSL [INSTALL_SCRIPT_URL] | bash
-```
-
-### 方式 B：Docker Compose
+### 方式 A：Docker Compose（推荐）
 
 ```bash
-git clone https://github.com/[GITHUB_OWNER]/[GITHUB_REPO].git
-cd [GITHUB_REPO]
+git clone https://github.com/allen219213-cloud/OpenClaw-Studio.git
+cd OpenClaw-Studio
 docker compose up --build
 ```
 
-### 方式 C：手动安装
+启动后访问：
+- 前端：http://localhost:5173
+- 后端健康检查：http://localhost:8000/api/v1/health
+
+### 方式 B：手动启动
 
 ```bash
-# 后端
+# backend
 cd backend
 python -m venv .venv
-# Windows: .venv\Scripts\activate
-# macOS/Linux: source .venv/bin/activate
+# Windows
+.venv\Scripts\activate
+# macOS/Linux
+# source .venv/bin/activate
 pip install -r requirements.txt
-uvicorn app.main:app --host 0.0.0.0 --port 8000
+python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
 
-# 前端（新终端）
+# frontend (new terminal)
 cd frontend
 npm install
 npm run dev
 ```
 
-### ✅ 验证是否启动成功
+## 文档与教程
 
-- 打开前端：[http://localhost:5173](http://localhost:5173)
-- 健康检查：[http://localhost:8000/api/v1/health](http://localhost:8000/api/v1/health)
+- 基础配置：[`docs/guide-basic.md`](./docs/guide-basic.md)
+- 进阶开发：[`docs/guide-advanced.md`](./docs/guide-advanced.md)
+- 实战案例：[`docs/case-media.md`](./docs/case-media.md)
+- 视觉素材制作规范：[`docs/visual-assets-guide.md`](./docs/visual-assets-guide.md)
+- 快速入门视频脚本：[`docs/QUICKSTART_VIDEO_SCRIPT.md`](./docs/QUICKSTART_VIDEO_SCRIPT.md)
+- 用户手册：[`docs/USER_MANUAL.md`](./docs/USER_MANUAL.md)
+- 开发者文档：[`docs/DEVELOPER_GUIDE.md`](./docs/DEVELOPER_GUIDE.md)
 
----
+## 贡献
 
-## 📚 完整教程
+欢迎提交 Issue 和 PR：
 
-- 基础配置教程：[`docs/guide-basic.md`](./docs/guide-basic.md)
-- 进阶开发教程：[`docs/guide-advanced.md`](./docs/guide-advanced.md)
-- 实战案例教程：[`docs/case-media.md`](./docs/case-media.md)
-- 视觉素材指南：[`docs/visual-assets-guide.md`](./docs/visual-assets-guide.md)
-- 视频教程脚本：[`docs/QUICKSTART_VIDEO_SCRIPT.md`](./docs/QUICKSTART_VIDEO_SCRIPT.md)
+- Bug 反馈：<https://github.com/allen219213-cloud/OpenClaw-Studio/issues>
+- 功能建议：<https://github.com/allen219213-cloud/OpenClaw-Studio/discussions>
 
-> 文档总入口（占位符）：[DOCS_HOME_URL]
+建议提交前先执行：
 
----
+```bash
+cd frontend && npm run lint && npm run build
+cd ../backend && python -m compileall app
+```
 
-## 🧩 贡献指南
+## License
 
-欢迎任何形式的贡献：
-
-- 提交 Bug：[`Issues`](https://github.com/[GITHUB_OWNER]/[GITHUB_REPO]/issues)
-- 提交功能建议：[`Discussions`](https://github.com/[GITHUB_OWNER]/[GITHUB_REPO]/discussions)
-- 贡献代码：Fork -> Commit -> Pull Request
-
-建议先阅读：[`CONTRIBUTING.md`](./CONTRIBUTING.md)（如尚未创建，请补充）
-
----
-
-## 📌 用户案例（占位符）
-
-- [用户案例1：公司/团队名称 + 成果]
-- [用户案例2：个人开发者 + 成果]
-- [用户案例3：教育/研究场景 + 成果]
-
-> 想展示你的案例？欢迎提交 PR 到 `docs/cases/`。
-
----
-
-## 🪪 许可证
-
-本项目基于 **MIT License** 开源，详见 [`LICENSE`](./LICENSE)。
-
----
-
-## 🌟 如果这个项目帮到了你
-
-请给一个 **Star** 支持一下，这会让项目被更多人看到，也会推动后续迭代更快进行。  
-👉 [点我 Star](https://github.com/[GITHUB_OWNER]/[GITHUB_REPO]/stargazers)
+MIT，详见 [LICENSE](./LICENSE)。
