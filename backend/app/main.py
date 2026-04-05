@@ -5,12 +5,15 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from app.api.agents import router as agents_router
 from app.api.backup import router as backup_router
 from app.api.health import router as health_router
 from app.api.init import router as init_router
+from app.api.providers import router as providers_router
 from app.api.service import router as service_router
 from app.api.settings import router as settings_router
 from app.api.system import router as system_router
+from app.api.templates import router as templates_router
 from app.core.config import settings
 from app.schemas.common import ErrorResponse
 from app.state import container
@@ -52,6 +55,9 @@ app.include_router(service_router)
 app.include_router(settings_router)
 app.include_router(backup_router)
 app.include_router(init_router)
+app.include_router(providers_router)
+app.include_router(agents_router)
+app.include_router(templates_router)
 
 
 @app.websocket("/ws/status")

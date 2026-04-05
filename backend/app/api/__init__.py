@@ -1,3 +1,13 @@
-﻿from app.api import backup, health, init, service, settings, system
+﻿from app.api import agents, backup, health, init, providers, service, settings, system, templates
 
-__all__ = ["backup", "health", "init", "service", "settings", "system"]
+__all__ = [
+    "agents",
+    "backup",
+    "health",
+    "init",
+    "providers",
+    "service",
+    "settings",
+    "system",
+    "templates",
+]
