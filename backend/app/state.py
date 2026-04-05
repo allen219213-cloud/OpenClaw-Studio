@@ -8,6 +8,8 @@ from app.services.status_service import StatusBroadcastService
 from app.services.system_service import SystemService
 from app.services.task_service import TaskService
 from app.services.template_service import AgentTemplateService
+from app.services.workflow_execution_service import WorkflowExecutionService
+from app.services.workflow_service import WorkflowService
 
 
 class ServiceContainer:
@@ -21,6 +23,8 @@ class ServiceContainer:
         self.provider_service = ProviderService()
         self.agent_service = AgentService()
         self.template_service = AgentTemplateService()
+        self.workflow_service = WorkflowService()
+        self.workflow_execution_service = WorkflowExecutionService()
         self.init_service = InitializationService(self.task_service, self.status_service)
 
 

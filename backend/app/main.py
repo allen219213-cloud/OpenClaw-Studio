@@ -14,6 +14,7 @@ from app.api.service import router as service_router
 from app.api.settings import router as settings_router
 from app.api.system import router as system_router
 from app.api.templates import router as templates_router
+from app.api.workflows import router as workflows_router
 from app.core.config import settings
 from app.schemas.common import ErrorResponse
 from app.state import container
@@ -58,6 +59,7 @@ app.include_router(init_router)
 app.include_router(providers_router)
 app.include_router(agents_router)
 app.include_router(templates_router)
+app.include_router(workflows_router)
 
 
 @app.websocket("/ws/status")
@@ -70,3 +72,13 @@ async def websocket_status(websocket: WebSocket) -> None:
             await websocket.receive_text()
     except WebSocketDisconnect:
         container.status_service.disconnect(websocket)
+
+
+@app.websocket("/ws/workflows/{workflow_id}/logs")
+async def websocket_workflow_logs(websocket: WebSocket, workflow_id: str) -> None:
+    await container.workflow_execution_service.connect_logs(workflow_id, websocket)
+    try:
+        while True:
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        container.workflow_execution_service.disconnect_logs(workflow_id, websocket)

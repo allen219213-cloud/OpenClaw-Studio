@@ -6,6 +6,8 @@ import { ApiCenterPage } from "@/pages/ApiCenterPage";
 import { AgentManagerPage } from "@/pages/AgentManagerPage";
 import { DashboardPage } from "@/pages/DashboardPage";
 import { SettingsPage } from "@/pages/SettingsPage";
+import { TaskExecutionPage } from "@/pages/TaskExecutionPage";
+import { WorkflowComposerPage } from "@/pages/WorkflowComposerPage";
 import { LogPanel } from "@/components/LogPanel";
 import { useStatusSocket } from "@/hooks/useStatusSocket";
 import { useAppStore } from "@/store/useAppStore";
@@ -13,15 +15,17 @@ import { useAppStore } from "@/store/useAppStore";
 const nodes: Node[] = [
   { id: "frontend", position: { x: 50, y: 120 }, data: { label: "React Frontend" }, type: "default" },
   { id: "backend", position: { x: 350, y: 120 }, data: { label: "FastAPI Backend" }, type: "default" },
-  { id: "llm", position: { x: 650, y: 120 }, data: { label: "LLM Providers" }, type: "default" }
+  { id: "llm", position: { x: 650, y: 120 }, data: { label: "LLM Providers" }, type: "default" },
+  { id: "workflow", position: { x: 950, y: 120 }, data: { label: "Workflow Engine" }, type: "default" }
 ];
 
 const edges: Edge[] = [
   { id: "e1-2", source: "frontend", target: "backend", label: "REST/WS" },
-  { id: "e2-3", source: "backend", target: "llm", label: "API Gateway" }
+  { id: "e2-3", source: "backend", target: "llm", label: "API Gateway" },
+  { id: "e2-4", source: "backend", target: "workflow", label: "Task Runtime" }
 ];
 
-type TabKey = "dashboard" | "settings" | "api-center" | "agents";
+type TabKey = "dashboard" | "settings" | "api-center" | "agents" | "workflow-composer" | "task-execution";
 
 function App(): JSX.Element {
   const [tab, setTab] = useState<TabKey>("dashboard");
@@ -59,6 +63,20 @@ function App(): JSX.Element {
             </button>
             <button
               type="button"
+              className={`rounded px-3 py-1 text-sm ${tab === "workflow-composer" ? "bg-sky-400 text-slate-950" : "bg-slate-800 text-slate-100"}`}
+              onClick={() => setTab("workflow-composer")}
+            >
+              任务编排
+            </button>
+            <button
+              type="button"
+              className={`rounded px-3 py-1 text-sm ${tab === "task-execution" ? "bg-sky-400 text-slate-950" : "bg-slate-800 text-slate-100"}`}
+              onClick={() => setTab("task-execution")}
+            >
+              任务执行
+            </button>
+            <button
+              type="button"
               className={`rounded px-3 py-1 text-sm ${tab === "settings" ? "bg-sky-400 text-slate-950" : "bg-slate-800 text-slate-100"}`}
               onClick={() => setTab("settings")}
             >
@@ -85,6 +103,8 @@ function App(): JSX.Element {
           {tab === "settings" ? <SettingsPage /> : null}
           {tab === "api-center" ? <ApiCenterPage /> : null}
           {tab === "agents" ? <AgentManagerPage /> : null}
+          {tab === "workflow-composer" ? <WorkflowComposerPage /> : null}
+          {tab === "task-execution" ? <TaskExecutionPage /> : null}
         </section>
         <LogPanel logs={logs} />
       </div>

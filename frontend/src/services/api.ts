@@ -6,6 +6,10 @@
   BackupInfo,
   DashboardPayload,
   InitStatus,
+  Workflow,
+  WorkflowInput,
+  WorkflowRunState,
+  WorkflowTemplate,
   ProviderConfig,
   ProviderInput,
   ProviderMeta,
@@ -151,4 +155,75 @@ export function importAgent(format: "json" | "yaml", content: string): Promise<A
     method: "POST",
     body: JSON.stringify({ format, content })
   });
+}
+
+export async function listWorkflows(query = "", category = ""): Promise<Workflow[]> {
+  const params = new URLSearchParams();
+  if (query) params.set("q", query);
+  if (category) params.set("category", category);
+  const suffix = params.toString() ? `?${params}` : "";
+  const response = await request<{ items: Workflow[] }>(`/api/v1/workflows${suffix}`);
+  return response.items;
+}
+
+export function createWorkflow(payload: WorkflowInput): Promise<ApiResponse> {
+  return request<ApiResponse>("/api/v1/workflows", { method: "POST", body: JSON.stringify(payload) });
+}
+
+export function updateWorkflow(id: string, payload: WorkflowInput): Promise<ApiResponse> {
+  return request<ApiResponse>(`/api/v1/workflows/${id}`, { method: "PUT", body: JSON.stringify(payload) });
+}
+
+export function deleteWorkflow(id: string): Promise<ApiResponse> {
+  return request<ApiResponse>(`/api/v1/workflows/${id}`, { method: "DELETE" });
+}
+
+export async function listWorkflowTemplates(): Promise<WorkflowTemplate[]> {
+  const response = await request<{ items: WorkflowTemplate[] }>("/api/v1/workflows/templates");
+  return response.items;
+}
+
+export async function exportWorkflow(id: string, format: "json" | "yaml"): Promise<string> {
+  const response = await request<{ success: boolean; message: string; content: string }>(
+    `/api/v1/workflows/${id}/export`,
+    {
+      method: "POST",
+      body: JSON.stringify({ format })
+    }
+  );
+  if (!response.success) {
+    throw new Error(response.message);
+  }
+  return response.content;
+}
+
+export function importWorkflow(format: "json" | "yaml", content: string): Promise<ApiResponse> {
+  return request<ApiResponse>("/api/v1/workflows/import", {
+    method: "POST",
+    body: JSON.stringify({ format, content })
+  });
+}
+
+export function workflowAction(
+  id: string,
+  action: "start" | "pause" | "resume" | "stop" | "retry"
+): Promise<ApiResponse> {
+  return request<ApiResponse>(`/api/v1/workflows/${id}/execute`, {
+    method: "POST",
+    body: JSON.stringify({ action })
+  });
+}
+
+export async function getWorkflowRun(id: string): Promise<WorkflowRunState> {
+  const response = await request<{ item: WorkflowRunState }>(`/api/v1/workflows/${id}/run`);
+  return response.item;
+}
+
+export async function exportWorkflowResult(
+  id: string,
+  format: "markdown" | "html" | "pdf"
+): Promise<{ path: string; message: string; success: boolean }> {
+  return request<{ path: string; message: string; success: boolean }>(
+    `/api/v1/workflows/${id}/result/export?format=${format}`
+  );
 }

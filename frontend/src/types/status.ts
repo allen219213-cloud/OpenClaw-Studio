@@ -153,3 +153,68 @@ export interface AgentTemplate {
   description: string;
   agent: AgentInput;
 }
+
+export interface WorkflowNodeData {
+  label?: string;
+  [key: string]: unknown;
+}
+
+export interface WorkflowNode {
+  id: string;
+  type: string;
+  position: { x: number; y: number };
+  data: WorkflowNodeData;
+}
+
+export interface WorkflowEdge {
+  id: string;
+  source: string;
+  target: string;
+  label?: string;
+  data?: Record<string, unknown>;
+}
+
+export interface WorkflowGraph {
+  nodes: WorkflowNode[];
+  edges: WorkflowEdge[];
+}
+
+export interface Workflow {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  tags: string[];
+  graph: WorkflowGraph;
+  variables: Record<string, unknown>;
+  compatibility_mode: string;
+  openclaw_version: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface WorkflowInput {
+  name: string;
+  description: string;
+  category: string;
+  tags: string[];
+  graph: WorkflowGraph;
+  variables: Record<string, unknown>;
+  compatibility_mode: string;
+}
+
+export interface WorkflowTemplate {
+  id: string;
+  name: string;
+  category: string;
+  workflow: WorkflowInput;
+}
+
+export interface WorkflowRunState {
+  status: "idle" | "running" | "paused" | "stopped" | "completed";
+  progress: number;
+  logs: Array<{ level: string; message: string; at: string; agent?: string }>;
+  conversation: Array<{ agent: string; thought: string; at: string }>;
+  result: string;
+  updated_at: string;
+}

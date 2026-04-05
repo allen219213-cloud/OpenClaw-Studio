@@ -1,4 +1,4 @@
-﻿from app.api import agents, backup, health, init, providers, service, settings, system, templates
+﻿from app.api import agents, backup, health, init, providers, service, settings, system, templates, workflows
 
 __all__ = [
     "agents",
@@ -10,4 +10,5 @@ __all__ = [
     "settings",
     "system",
     "templates",
+    "workflows",
 ]
