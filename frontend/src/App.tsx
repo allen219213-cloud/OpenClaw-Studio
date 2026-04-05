@@ -1,4 +1,4 @@
-﻿import { Background, Controls, MiniMap, ReactFlow, type Edge, type Node } from "reactflow";
+import { Background, Controls, MiniMap, ReactFlow, type Edge, type Node } from "reactflow";
 import "reactflow/dist/style.css";
 
 import { LogPanel } from "@/components/LogPanel";

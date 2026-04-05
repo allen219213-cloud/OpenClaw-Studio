@@ -1,4 +1,4 @@
-﻿export type StatusLevel = "info" | "success" | "error";
+export type StatusLevel = "info" | "success" | "error";
 
 export interface BackendStatus {
   level: StatusLevel;

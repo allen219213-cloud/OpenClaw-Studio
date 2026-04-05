@@ -1,4 +1,4 @@
-﻿# lobster-claw
+# lobster-claw
 
 A full-stack scaffold with React + FastAPI for real-time workflow visualization.
 

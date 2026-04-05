@@ -1,4 +1,4 @@
-﻿import type { BackendStatus } from "@/types/status";
+import type { BackendStatus } from "@/types/status";
 
 const levelColors: Record<BackendStatus["level"], string> = {
   info: "text-sky-400",

@@ -1,4 +1,4 @@
-﻿import { useEffect } from "react";
+import { useEffect } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import type { BackendStatus } from "@/types/status";
 import { wsStatusUrl } from "@/services/api";

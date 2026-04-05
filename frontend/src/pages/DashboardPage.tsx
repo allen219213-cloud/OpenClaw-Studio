@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { healthCheck } from "@/services/api";
 
 export function DashboardPage(): JSX.Element {
