@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import type { BackendStatus } from "@/types/status";
 import { wsStatusUrl } from "@/services/api";
@@ -9,6 +9,10 @@ export function useStatusSocket(): void {
   useEffect(() => {
     const socket = new WebSocket(wsStatusUrl());
 
+    socket.onopen = () => {
+      socket.send("subscribe");
+    };
+
     socket.onmessage = (event) => {
       try {
         const payload = JSON.parse(event.data) as BackendStatus;
@@ -16,7 +20,7 @@ export function useStatusSocket(): void {
       } catch {
         addLog({
           level: "error",
-          message: "Received invalid websocket payload",
+          message: "实时消息解析失败",
           at: new Date().toISOString()
         });
       }
@@ -25,7 +29,7 @@ export function useStatusSocket(): void {
     socket.onerror = () => {
       addLog({
         level: "error",
-        message: "WebSocket connection error",
+        message: "实时连接异常，请稍后重试",
         at: new Date().toISOString()
       });
     };
