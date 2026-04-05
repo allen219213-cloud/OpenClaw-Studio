@@ -1,0 +1,21 @@
+﻿{
+  "name": "研究报告自动化",
+  "description": "示例任务：研究+总结",
+  "category": "research",
+  "tags": ["research", "example"],
+  "graph": {
+    "nodes": [
+      {"id":"start","type":"start","position":{"x":50,"y":120},"data":{"label":"开始"}},
+      {"id":"agent1","type":"agent","position":{"x":280,"y":120},"data":{"label":"检索资料","agent_id":"researcher"}},
+      {"id":"agent2","type":"agent","position":{"x":500,"y":120},"data":{"label":"生成报告","agent_id":"writer"}},
+      {"id":"end","type":"end","position":{"x":720,"y":120},"data":{"label":"结束"}}
+    ],
+    "edges": [
+      {"id":"e1","source":"start","target":"agent1","label":"next","data":{}},
+      {"id":"e2","source":"agent1","target":"agent2","label":"next","data":{}},
+      {"id":"e3","source":"agent2","target":"end","label":"done","data":{}}
+    ]
+  },
+  "variables": {},
+  "compatibility_mode": "openclaw-v1"
+}

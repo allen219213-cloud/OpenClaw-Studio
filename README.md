@@ -67,3 +67,11 @@ npm run format:check
 - Initialize shadcn/ui components (`npx shadcn@latest init` in `frontend/`)
 - Add auth and domain models in `backend/app/models`
 - Add CI workflow for lint/test/build
+
+## Docs and examples
+
+- User manual: `docs/USER_MANUAL.md`
+- Developer guide: `docs/DEVELOPER_GUIDE.md`
+- Quickstart video script: `docs/QUICKSTART_VIDEO_SCRIPT.md`
+- Example workflows: `examples/tasks/`
+- Example agents: `examples/agents/`

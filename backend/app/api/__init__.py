@@ -1,14 +1,33 @@
-﻿from app.api import agents, backup, health, init, providers, service, settings, system, templates, workflows
+﻿from app.api import (
+    agents,
+    backup,
+    community,
+    health,
+    init,
+    providers,
+    service,
+    settings,
+    shares,
+    system,
+    templates,
+    tools,
+    users,
+    workflows,
+)
 
 __all__ = [
     "agents",
     "backup",
+    "community",
     "health",
     "init",
     "providers",
     "service",
     "settings",
+    "shares",
     "system",
     "templates",
+    "tools",
+    "users",
     "workflows",
 ]

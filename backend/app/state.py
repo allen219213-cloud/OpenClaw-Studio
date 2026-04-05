@@ -1,13 +1,17 @@
 ﻿from app.services.agent_service import AgentService
 from app.services.backup_service import BackupService
+from app.services.community_template_service import CommunityTemplateService
 from app.services.init_service import InitializationService
 from app.services.openclaw_service import OpenClawService
 from app.services.provider_service import ProviderService
 from app.services.settings_service import SettingsService
+from app.services.share_service import ShareService
 from app.services.status_service import StatusBroadcastService
 from app.services.system_service import SystemService
 from app.services.task_service import TaskService
 from app.services.template_service import AgentTemplateService
+from app.services.tool_market_service import ToolMarketService
+from app.services.user_service import UserService
 from app.services.workflow_execution_service import WorkflowExecutionService
 from app.services.workflow_service import WorkflowService
 
@@ -23,6 +27,10 @@ class ServiceContainer:
         self.provider_service = ProviderService()
         self.agent_service = AgentService()
         self.template_service = AgentTemplateService()
+        self.community_template_service = CommunityTemplateService()
+        self.share_service = ShareService()
+        self.user_service = UserService()
+        self.tool_market_service = ToolMarketService()
         self.workflow_service = WorkflowService()
         self.workflow_execution_service = WorkflowExecutionService()
         self.init_service = InitializationService(self.task_service, self.status_service)

@@ -218,3 +218,57 @@ export interface WorkflowRunState {
   result: string;
   updated_at: string;
 }
+
+export interface ToolItem {
+  name: string;
+  category: string;
+  description: string;
+  repo?: string;
+  version?: string;
+  rating: number;
+  reviews: number;
+}
+
+export interface ToolReview {
+  id: string;
+  tool_name: string;
+  user_id: string;
+  rating: number;
+  comment: string;
+  created_at: string;
+}
+
+export interface UserInfo {
+  id: string;
+  username: string;
+  role: "admin" | "user";
+  created_at: string;
+}
+
+export interface SessionInfo {
+  token: string;
+  role: "admin" | "user";
+  username: string;
+}
+
+export interface ShareItem {
+  id: string;
+  resource_type: string;
+  resource_id: string;
+  visibility: "public" | "private";
+  owner: string;
+  created_at: string;
+}
+
+export interface CommunityTemplate {
+  id: string;
+  name: string;
+  description: string;
+  template_type: string;
+  content: Record<string, unknown>;
+  author: string;
+  downloads: number;
+  rating: number;
+  votes: number;
+  created_at: string;
+}

@@ -6,10 +6,16 @@
   BackupInfo,
   DashboardPayload,
   InitStatus,
+  CommunityTemplate,
   Workflow,
   WorkflowInput,
   WorkflowRunState,
   WorkflowTemplate,
+  SessionInfo,
+  ShareItem,
+  ToolItem,
+  ToolReview,
+  UserInfo,
   ProviderConfig,
   ProviderInput,
   ProviderMeta,
@@ -226,4 +232,98 @@ export async function exportWorkflowResult(
   return request<{ path: string; message: string; success: boolean }>(
     `/api/v1/workflows/${id}/result/export?format=${format}`
   );
+}
+
+export async function listTools(query = ""): Promise<ToolItem[]> {
+  const suffix = query ? `?q=${encodeURIComponent(query)}` : "";
+  const response = await request<{ items: ToolItem[] }>(`/api/v1/tools${suffix}`);
+  return response.items;
+}
+
+export function installTool(payload: {
+  name: string;
+  description: string;
+  repo: string;
+  version: string;
+  config_schema: Record<string, unknown>;
+}): Promise<ApiResponse> {
+  return request<ApiResponse>("/api/v1/tools/install", {
+    method: "POST",
+    body: JSON.stringify(payload)
+  });
+}
+
+export async function listToolReviews(toolName: string): Promise<ToolReview[]> {
+  const response = await request<{ items: ToolReview[] }>(`/api/v1/tools/${toolName}/reviews`);
+  return response.items;
+}
+
+export function addToolReview(payload: {
+  tool_name: string;
+  user_id: string;
+  rating: number;
+  comment: string;
+}): Promise<ApiResponse> {
+  return request<ApiResponse>("/api/v1/tools/reviews", { method: "POST", body: JSON.stringify(payload) });
+}
+
+export async function listUsers(): Promise<UserInfo[]> {
+  const response = await request<{ items: UserInfo[] }>("/api/v1/users");
+  return response.items;
+}
+
+export function createUser(payload: { username: string; password: string; role: "admin" | "user" }): Promise<ApiResponse> {
+  return request<ApiResponse>("/api/v1/users", { method: "POST", body: JSON.stringify(payload) });
+}
+
+export async function login(payload: { username: string; password: string }): Promise<{ success: boolean; message: string; item: SessionInfo | null }> {
+  return request<{ success: boolean; message: string; item: SessionInfo | null }>("/api/v1/users/login", {
+    method: "POST",
+    body: JSON.stringify(payload)
+  });
+}
+
+export function createShare(payload: {
+  resource_type: string;
+  resource_id: string;
+  visibility: "public" | "private";
+  owner: string;
+}): Promise<ApiResponse> {
+  return request<ApiResponse>("/api/v1/shares", { method: "POST", body: JSON.stringify(payload) });
+}
+
+export async function listPublicShares(): Promise<ShareItem[]> {
+  const response = await request<{ items: ShareItem[] }>("/api/v1/shares/public");
+  return response.items;
+}
+
+export async function listCommunityTemplates(query = ""): Promise<CommunityTemplate[]> {
+  const suffix = query ? `?q=${encodeURIComponent(query)}` : "";
+  const response = await request<{ items: CommunityTemplate[] }>(`/api/v1/community/templates${suffix}`);
+  return response.items;
+}
+
+export function uploadCommunityTemplate(payload: {
+  name: string;
+  description: string;
+  template_type: string;
+  content: Record<string, unknown>;
+  author: string;
+}): Promise<ApiResponse> {
+  return request<ApiResponse>("/api/v1/community/templates", {
+    method: "POST",
+    body: JSON.stringify(payload)
+  });
+}
+
+export async function downloadCommunityTemplate(templateId: string): Promise<{ success: boolean; item?: CommunityTemplate; message?: string }> {
+  return request<{ success: boolean; item?: CommunityTemplate; message?: string }>(
+    `/api/v1/community/templates/${templateId}/download`
+  );
+}
+
+export function rateCommunityTemplate(templateId: string, score: number): Promise<ApiResponse> {
+  return request<ApiResponse>(`/api/v1/community/templates/${templateId}/rate?score=${score}`, {
+    method: "POST"
+  });
 }
